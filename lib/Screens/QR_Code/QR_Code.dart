@@ -94,7 +94,8 @@ class _QR_CodeState extends State<QR_Code> {
                 },
                 child: Text('امسح الكود'),
                 style: ElevatedButton.styleFrom(
-                  primary: SColor,
+                  // primary: SColor,
+                  backgroundColor:SColor ,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(30.0),
                   ),

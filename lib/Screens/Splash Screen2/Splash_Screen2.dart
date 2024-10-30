@@ -81,7 +81,8 @@ class Splash_Screen2 extends StatelessWidget {
                         },
                         child: const Text('استمرار'),
                         style: ElevatedButton.styleFrom(
-                          primary:SColor,
+                          // primary:SColor,
+                          backgroundColor:SColor ,
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(30.0),
                           ),

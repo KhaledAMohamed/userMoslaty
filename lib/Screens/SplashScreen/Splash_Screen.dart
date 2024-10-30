@@ -63,7 +63,8 @@ class Splash_Screen extends StatelessWidget {
                         },
                         child: const Text('هل توافق على الشروط ؟'),
                         style: ElevatedButton.styleFrom(
-                          primary:SColor,
+                          // primary:SColor,
+                          backgroundColor:SColor ,
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(30.0),
                           ),

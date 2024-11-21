@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:user_moslaty/Widgets/Const.dart';
 
-import '../Screens/Profiel/Profile.dart';
+import '../Screens/Profile/Profile.dart';
+
 
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
 
@@ -33,7 +34,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
         onTap: (){
           Navigator.push(context,
               MaterialPageRoute(builder: (context){
-                return(const profiel());
+                return(const profile());
               }));
         },
         child: const Icon(  Icons.account_circle,

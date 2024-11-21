@@ -16,7 +16,7 @@ class YourTrips extends StatelessWidget {
         child: Drawer_Widget(),
         
       ),
-      body:   SingleChildScrollView(
+      body:  SingleChildScrollView(
         child: Column(
           children: [
             const Center(

@@ -1,14 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:user_moslaty/Provider/AppConfigProvider.dart';
 import 'package:user_moslaty/Widgets/NavigationBar_C.dart';
 import 'package:user_moslaty/Widgets/customApppar.dart';
 import 'package:user_moslaty/Widgets/drawer.dart';
 
 import '../../Widgets/CustomButon.dart';
-class profiel extends StatelessWidget {
-  const profiel({Key? key}) : super(key: key);
+class profile extends StatelessWidget {
+  const profile({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    var provider = Provider.of<AppConfigProvider>(context);
     return   Scaffold(
       endDrawer: Drawer(
         child: Drawer_Widget(),
@@ -20,7 +23,10 @@ class profiel extends StatelessWidget {
         child: Column(
           children: [
             const SizedBox(height: 15,),
-            Image.asset("Images/img_2.png",
+              Image.asset(
+                provider.userData?.data?.imageLink != null
+                    ? provider.userData!.data!.imageLink!
+                    : "Images/img_2.png",
               height: 96,
               width: 96,
             ),
@@ -37,7 +43,8 @@ class profiel extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 30,),
-            const Text("أحمد عادل",style: TextStyle(
+             Text(provider.userData!.data!.name!,
+              style: TextStyle(
               color: Color(0xFA023047),
               fontSize: 25,
               fontWeight: FontWeight.w900,
@@ -102,7 +109,7 @@ class profiel extends StatelessWidget {
 
                     ],
                   ),
-                  const Text("      0100002652                       ",
+                   Text(provider.userData!.data!.phone!,
                     style: TextStyle(
                       color: Color(0xFA023047),
                       fontSize: 16,

@@ -1,21 +1,22 @@
 import 'package:flutter/material.dart';
 
 class CustomTextField extends StatelessWidget {
-   CustomTextField({this.hintText,this.onChanged,this.icon,this.width,this.height});
+   CustomTextField({this.hintText,this.onChanged,this.icon,this.width,this.height, this.controller});
 String? hintText;
-double?width;
-double?height;
+double? width;
+double? height;
 IconData? icon;
    Function(String)? onChanged;
-  @override
+   TextEditingController? controller;
+
+   @override
   Widget build(BuildContext context) {
 
     return   SizedBox(
       height: height,
       width:width ,
       child: TextField(
-
-
+        controller: controller,
         onChanged: onChanged ,
 
         decoration: InputDecoration(

@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:user_moslaty/Screens/FAQs/FAQs.dart';
-import 'package:user_moslaty/Screens/LienDeteils/Lien_deteils.dart';
-import 'package:user_moslaty/Screens/abuot%20us/Abuot_Us.dart';
+import 'package:user_moslaty/Screens/Splash%20Screen2/Splash_Screen2.dart';
+import 'package:user_moslaty/Screens/SplashScreen/Splash_Screen.dart';
 import 'package:user_moslaty/Widgets/Const.dart';
-
 import '../../Widgets/CustomButon.dart';
 import '../../Widgets/NavigationBar_C.dart';
 import '../../Widgets/customApppar.dart';
 import '../../Widgets/drawer.dart';
+import '../LinesData/Lines_data.dart';
 import '../YourTrips/YourTrips.dart';
+import '../about us/About_Us.dart';
 class Setting_Page extends StatelessWidget {
   const Setting_Page({Key? key}) : super(key: key);
 
@@ -63,7 +64,7 @@ class Setting_Page extends StatelessWidget {
               CustomButon1(
                 ontap: (){
                   Navigator.push(context, MaterialPageRoute(builder: (context){
-                    return( Lien_Deteils());
+                    return( Lines_Data());
                   }));
 
                 },
@@ -102,6 +103,11 @@ class Setting_Page extends StatelessWidget {
               ),
 
               CustomButon1(
+                ontap: (){
+                  Navigator.push(context, MaterialPageRoute(builder: (context){
+                    return(const Splash_Screen2());
+                  }));
+                },
                 width: 379,
                 hight: 50,
                 text: "بنود و أحكام",
@@ -110,6 +116,11 @@ class Setting_Page extends StatelessWidget {
               ),
 
               CustomButon1(
+                ontap: (){
+                  Navigator.push(context, MaterialPageRoute(builder: (context){
+                    return(const Splash_Screen());
+                  }));
+                },
                 width: 379,
                 hight: 50,
                 text: "الشروط و الخصوصية",

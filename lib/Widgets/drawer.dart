@@ -1,14 +1,14 @@
 
-
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:user_moslaty/Provider/AppConfigProvider.dart';
 import 'package:user_moslaty/Screens/LoginScreen/login_screen.dart';
 import 'package:user_moslaty/Screens/QR_Code/QR_Code.dart';
 import 'package:user_moslaty/Screens/Setting/setting.dart';
 import 'package:user_moslaty/Widgets/Const.dart';
-
 import '../Screens/FAQs/FAQs.dart';
-import '../Screens/Profiel/Profile.dart';
-import '../Screens/abuot us/Abuot_Us.dart';
+import '../Screens/Profile/Profile.dart';
+import '../Screens/about us/About_Us.dart';
 
 
 class Drawer_Widget extends StatefulWidget {
@@ -21,6 +21,7 @@ class Drawer_Widget extends StatefulWidget {
 class _Drawer_WidgetState extends State<Drawer_Widget> {
   @override
   Widget build(BuildContext context) {
+    var provider = Provider.of<AppConfigProvider>(context);
     return Container(
       child: SingleChildScrollView(
         child: Container(
@@ -45,13 +46,15 @@ class _Drawer_WidgetState extends State<Drawer_Widget> {
                       ),
 
                     ),
-                     const Text("أحمد عادل",style: TextStyle(
+                      Text( provider.userData!.data!.name ?? '',
+                       style: TextStyle(
                       color: Color(0xFA023047),
                       fontSize: 25,
                       fontWeight: FontWeight.w900,
                       fontFamily: 'Inter',
                     ),),
-                    const Text("0101050622",style: TextStyle(
+                     Text(provider.userData!.data!.phone ?? '',
+                      style: TextStyle(
                       color: Color(0xFA023047),
                       fontSize: 25,
                       fontWeight: FontWeight.w900,
@@ -138,7 +141,7 @@ class maenList extends StatelessWidget {
               if (id == 1) {
                 Navigator.push(context, MaterialPageRoute(
                     builder:(context){
-                      return(const profiel());
+                      return(const profile());
                     } ));
               }
 
@@ -170,7 +173,7 @@ class maenList extends StatelessWidget {
               else if (id == 7) {
                 Navigator.push(context, MaterialPageRoute(
                     builder:(context){
-                      return(const LoginScreen());
+                      return( LoginScreen());
                     } ));
               }
             },

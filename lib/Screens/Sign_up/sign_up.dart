@@ -1,21 +1,28 @@
 import 'package:flutter/material.dart';
+import 'package:user_moslaty/Networks/Api_manager/Api_manager.dart';
 import 'package:user_moslaty/Screens/SplashScreen/Splash_Screen.dart';
-
-
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:user_moslaty/Widgets/toast.dart';
 import '../../Widgets/CustomButon.dart';
 import '../../Widgets/custom_textField.dart';
 import '../LoginScreen/login_screen.dart';
 
 class Sign_UpPage extends StatelessWidget {
-  const Sign_UpPage({Key? key}) : super(key: key);
+
+
+  TextEditingController userNameController = TextEditingController();
+  TextEditingController emailController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
+  TextEditingController passwordConfirmationController = TextEditingController();
+  TextEditingController phoneNumberController = TextEditingController();
+
+
 
   @override
   Widget build(BuildContext context) {
     return  Scaffold(
    body:   Container(
         padding: const EdgeInsets.symmetric(horizontal: 15),
-
-
         child: SingleChildScrollView(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.end,
@@ -53,6 +60,7 @@ class Sign_UpPage extends StatelessWidget {
               ),
 
               CustomTextField(
+                controller: userNameController,
                 height: 45,
                 width: 400,
                 hintText: " ادخل الاسم ثلاثي ",
@@ -67,6 +75,7 @@ class Sign_UpPage extends StatelessWidget {
                 ),
               ),
               CustomTextField(
+                controller: emailController,
                 height: 45,
                 width: 400,
                 hintText: "ادخل البريد الاكتروني " ,
@@ -81,6 +90,7 @@ class Sign_UpPage extends StatelessWidget {
                 ),
               ),
               CustomTextField(
+                controller: passwordController,
                 width: 400,
                 height: 45,
                 hintText: "ادخل كلمة السر " ,
@@ -95,6 +105,7 @@ class Sign_UpPage extends StatelessWidget {
                 ),
               ),
               CustomTextField(
+                controller: passwordConfirmationController,
                 height: 45,
                 width: 400,
                 hintText: "تأكيد كلمة السر " ,
@@ -109,6 +120,7 @@ class Sign_UpPage extends StatelessWidget {
                 ),
               ),
               CustomTextField(
+                controller: phoneNumberController,
                 hintText: "ادخل رقم الهاتف " ,
                 width: 400,
                 height: 45,
@@ -122,10 +134,11 @@ class Sign_UpPage extends StatelessWidget {
                 text: 'إنشاء حساب', color: const Color(0xFA023047),
                 colorText: Colors.white,
                 ontap:(){
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context){
-                        return const Splash_Screen();
-                      }));
+                  registerUser(context);
+                  // Navigator.push(context,
+                  //     MaterialPageRoute(builder: (context){
+                  //       return const Splash_Screen();
+                  //     }));
                 } ,
               ),
               const SizedBox(
@@ -139,10 +152,10 @@ class Sign_UpPage extends StatelessWidget {
                     onTap: (){
                       Navigator.push(context,
                           MaterialPageRoute(builder: (context){
-                            return const LoginScreen() ;
+                            return  LoginScreen() ;
                           }));
                     },
-                    child: const Text("  تسجيل دخول",
+                    child: const Text(" تسجيل دخول",
                       textAlign: TextAlign.left,
                       style: TextStyle(color: Color(-580755617)),),
                   ),
@@ -170,4 +183,39 @@ class Sign_UpPage extends StatelessWidget {
     )
     ;
   }
+
+  void registerUser(BuildContext context)async {
+    final result = await ApiManager.registerUser(
+      userNameController.text.trim(),
+      emailController.text.trim(),
+      passwordController.text.trim(),
+      passwordConfirmationController.text.trim(),
+      phoneNumberController.text.trim(),
+    );
+    result.fold(
+            (error) {
+              if (error.errors!.name!.isNotEmpty){
+                toast.showToast(error.errors!.name.toString());
+              }
+              if (error.errors!.email!.isNotEmpty){
+                toast.showToast(error.errors!.email.toString());
+              }
+              if (error.errors!.password!.isNotEmpty){
+                toast.showToast(error.errors!.password.toString());
+              }
+              if (error.errors!.phone!.isNotEmpty){
+                toast.showToast(error.errors!.phone.toString());
+              }
+
+            },
+    (response) {
+      toast.showToast(response.message!);
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (context) => Splash_Screen()),
+      );
+    },
+    );
+  }
+
 }

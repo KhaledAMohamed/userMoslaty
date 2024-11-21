@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:user_moslaty/Provider/AppConfigProvider.dart';
+import 'package:user_moslaty/Widgets/toast.dart';
 
+import '../../Networks/Api_manager/Api_manager.dart';
 import '../../Widgets/CustomButon.dart';
 import '../../Widgets/custom_textField.dart';
 import '../Sign_up/sign_up.dart';
@@ -7,8 +11,10 @@ import '../home/Home_Page.dart';
 
 
 class LoginScreen extends StatelessWidget {
+  static String routeName = 'LoginScreen';
+  TextEditingController emailController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
 
-  const LoginScreen ({Key? key}) : super(key: key);
 
   @override
 
@@ -55,6 +61,7 @@ class LoginScreen extends StatelessWidget {
               ),
 
               CustomTextField(
+                controller: emailController,
                 width: 400,
                 height: 45,
                 hintText: " ادخل البريد الاكتروني ",
@@ -69,6 +76,7 @@ class LoginScreen extends StatelessWidget {
                 ),
               ),
               CustomTextField(
+                controller: passwordController,
                 width: 400,
                 height: 45,
                 hintText: "ادخل الرقم السري" ,
@@ -82,11 +90,7 @@ class LoginScreen extends StatelessWidget {
                 text: 'تسجيل دخول', color: const Color(0xFA023047),
                 colorText: Colors.white,
                 ontap:(){
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context){
-                        return Home_Page();
-                        //return const S_HomePage();
-                      }));
+                  login(context);
                 } ,
               ),
               const SizedBox(
@@ -100,7 +104,7 @@ class LoginScreen extends StatelessWidget {
                     onTap: (){
                       Navigator.push(context,
                           MaterialPageRoute(builder: (context){
-                            return const Sign_UpPage() ;
+                            return  Sign_UpPage() ;
                           }));
                     },
                     child: const Text("  إنشاء حساب جديد",
@@ -131,4 +135,46 @@ contener(text: " الدخول بواسطة حساب جوجل ",
     )
     ;
   }
+
+  void login(BuildContext context)async {
+   var provider =  Provider.of<AppConfigProvider>(context, listen: false);
+    final result = await ApiManager.login(
+      emailController.text.trim(),
+      passwordController.text.trim(),
+    );
+    result.fold(
+          (error) {
+        if(error.status == false){
+          toast.showToast(error.message.toString());
+        }
+        if (error.errors!.email!.isNotEmpty){
+          toast.showToast(error.errors!.email.toString());
+        }
+        if (error.errors!.password!.isNotEmpty){
+          toast.showToast(error.errors!.password.toString());
+        }
+      },
+          (response) async {
+        toast.showToast(response.message!);
+        try {
+          final userDataResponse = await ApiManager.userMainData(response.user!.toString());
+          if (userDataResponse != null) {
+            provider.setUserData(userDataResponse);
+            provider.setUserId(response.user!.toString());
+            Navigator.push(context, MaterialPageRoute(builder: (context) {
+              return Home_Page();
+            }));
+          }
+        } catch (e) {
+          toast.showToast("Failed to fetch user data.");
+        }
+   },
+        // provider.setUserId(response.user!.toString());
+        // Navigator.push(context,
+        //     MaterialPageRoute(builder: (context){
+        //       return Home_Page();
+        //     }));
+    );
+  }
+
 }

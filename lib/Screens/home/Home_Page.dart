@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:user_moslaty/Models/HomeResponse.dart';
 import 'package:user_moslaty/Networks/Api_manager/Api_manager.dart';
 import 'package:user_moslaty/Provider/AppConfigProvider.dart';
+import 'package:user_moslaty/Screens/LoginScreen/login_screen.dart';
 import 'package:user_moslaty/Screens/YourTrips/YourTrips.dart';
 import 'package:user_moslaty/Widgets/NavigationBar_C.dart';
 import 'package:user_moslaty/Widgets/current_line.dart';
@@ -20,10 +22,12 @@ class Home_Page extends StatefulWidget {
 }
 
 class _Home_PageState extends State<Home_Page> {
+
   @override
   Widget build(BuildContext context) {
     final provider = Provider.of<AppConfigProvider>(context);
-    return Scaffold(
+
+    return  Scaffold(
       appBar: CustomAppBar(),
       bottomNavigationBar: const NavigationBar_C(),
       endDrawer: const Drawer(child: Drawer_Widget()),
@@ -83,7 +87,7 @@ class _Home_PageState extends State<Home_Page> {
                         onTap: () {
                           Navigator.push(
                             context,
-                            MaterialPageRoute(builder: (context) => TripDetail()),
+                            MaterialPageRoute(builder: (context) => TripDetail(lineId: linesList[index].lineId!,)),
                           );
                         },
                         child: Stack(
@@ -202,6 +206,6 @@ class _Home_PageState extends State<Home_Page> {
           ],
         ),
       ),
-    );
+    ) ;
   }
 }

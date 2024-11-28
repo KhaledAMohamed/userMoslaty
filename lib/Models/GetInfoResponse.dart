@@ -40,7 +40,9 @@ class GetInfoResponse {
 class Data {
   Data({
       this.id, 
-      this.sectorOrder, 
+      this.sectorOrder,
+      this.firstSection,
+      this.secondSection,
       this.imageLink, 
       this.data, 
       this.showFlag, 
@@ -51,6 +53,8 @@ class Data {
     id = json['id'];
     sectorOrder = json['sector_order'];
     imageLink = json['image_link'];
+    firstSection = json['first_section'];
+    secondSection = json['second_section'];
     data = json['data'];
     showFlag = json['show_flag'];
     createdAt = json['created_at'];
@@ -61,6 +65,8 @@ class Data {
   String? imageLink;
   String? data;
   int? showFlag;
+  String? firstSection;
+  String? secondSection;
   dynamic createdAt;
   dynamic updatedAt;
 
@@ -70,6 +76,8 @@ class Data {
     map['sector_order'] = sectorOrder;
     map['image_link'] = imageLink;
     map['data'] = data;
+    map['first_section'] = firstSection;
+    map['secondSection'] = secondSection;
     map['show_flag'] = showFlag;
     map['created_at'] = createdAt;
     map['updated_at'] = updatedAt;

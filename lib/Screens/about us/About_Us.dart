@@ -68,10 +68,7 @@ class _About_usState extends State<About_us> {
                     height: 15,
                   ),
                    Text(
-                    // info!.data!.data.toString(),
-                    'تأسست شركة مصر للنقل الجماعي في عام 2019 '
-                    '   وهي أحدث شركة في مجموعة مصر. وهي شركة تقدم خدمة النقل السياحي بهيئة النقل الجماعي. برفاهية ودقة بين المحافظات السياحية وغيرها'
-                    '   مثل البحر الأحمر وشرم الشيخ والأقصر وأسوان وغيرها المحافظات',
+                    info!.data!.firstSection!,
                     style: TextStyle(
                         fontSize: 16,
                         color: Color(0xFF023047),
@@ -103,6 +100,16 @@ class _About_usState extends State<About_us> {
                   const SizedBox(
                     height: 15,
                   ),
+                  Text(
+                    info.data!.secondSection!,
+                    style: TextStyle(
+                        fontSize: 16,
+                        color: Color(0xFF023047),
+                        fontFamily: 'inter',
+                        fontWeight: FontWeight.w500),
+                    textAlign: TextAlign.end,
+                  ),
+
                 ],
               ));
         });

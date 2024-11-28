@@ -7,11 +7,12 @@ import '../../Models/LineDetailsResponse.dart';
 import '../../Networks/Api_manager/Api_manager.dart';
 import '../../Widgets/Const.dart';
 class TripDetail extends StatelessWidget {
-
+int lineId;
+  TripDetail({required this.lineId});
   @override
   Widget build(BuildContext context) {
     return FutureBuilder<LineDetailsResponse?>(
-        future: ApiManager.lineDetails('2'),
+        future: ApiManager.lineDetails(lineId.toString()),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const Center(child: CircularProgressIndicator());
@@ -47,7 +48,7 @@ class TripDetail extends StatelessWidget {
                     child:  Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Text(lineDetails.fees!,
+                        Text('${lineDetails.fees!} الاجرة ',
                           textAlign: TextAlign.center,
                           style: TextStyle(
                             fontSize: 24,
@@ -55,7 +56,7 @@ class TripDetail extends StatelessWidget {
                             color: SColor,
 
                           ),),
-                        Text(lineDetails.numberStations!.toString(),
+                        Text('${lineDetails.numberStations!.toString()} عدد المحطات ',
                           textAlign: TextAlign.center,
                           style: TextStyle(
                             fontSize: 24,

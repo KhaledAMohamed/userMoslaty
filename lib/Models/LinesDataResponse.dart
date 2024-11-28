@@ -1,5 +1,5 @@
 /// message : "Data Returned Successfully"
-/// data : [{"line_name":"القاهرة","fees":"80.00","estimated_time":15,"number_stations":3,"available_flag":1}]
+/// data : [{"line_id":1,"line_name":"ابنوب","fees":"80.00","estimated_time":20,"number_stations":3,"available_flag":1},{"line_id":2,"line_name":"الصعيد","fees":"150.00","estimated_time":55,"number_stations":2,"available_flag":1}]
 /// code : 200
 
 class LinesDataResponse {
@@ -34,14 +34,16 @@ class LinesDataResponse {
 
 }
 
-/// line_name : "القاهرة"
+/// line_id : 1
+/// line_name : "ابنوب"
 /// fees : "80.00"
-/// estimated_time : 15
+/// estimated_time : 20
 /// number_stations : 3
 /// available_flag : 1
 
 class Data {
   Data({
+      this.lineId, 
       this.lineName, 
       this.fees, 
       this.estimatedTime, 
@@ -49,12 +51,14 @@ class Data {
       this.availableFlag,});
 
   Data.fromJson(dynamic json) {
+    lineId = json['line_id'];
     lineName = json['line_name'];
     fees = json['fees'];
     estimatedTime = json['estimated_time'];
     numberStations = json['number_stations'];
     availableFlag = json['available_flag'];
   }
+  int? lineId;
   String? lineName;
   String? fees;
   int? estimatedTime;
@@ -63,6 +67,7 @@ class Data {
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
+    map['line_id'] = lineId;
     map['line_name'] = lineName;
     map['fees'] = fees;
     map['estimated_time'] = estimatedTime;

@@ -1,5 +1,5 @@
 /// message : "Data Returned Successfully"
-/// data : {"lines":[{"line_name":"القاهرة","fees":"80.00","map_image":"http://localhost/phpmyadmin/index.php?route=/table/change&db=mowaslaty-passenger-mobile-backend&table=line_data"}],"current_line":[{"starting_point":"القاهرة","ending_point":"ابنوب","estimated_time":15,"car_number":"khl28"}]}
+/// data : {"lines":[{"line_id":1,"line_name":"ابنوب","fees":"80.00","map_image":"file:///C:/Users/DELL/Downloads/Passenger%20App%20Arabic%20order.pdf"},{"line_id":2,"line_name":"الصعيد","fees":"150.00","map_image":"file:///C:/Users/DELL/Downloads/Passenger%20App%20Arabic%20order.pdf"}],"current_line":[{"starting_point":"القاهرة","ending_point":"أبنوب","estimated_time":"200","car_number":"ا ح م 341"},{"starting_point":"القاهرة","ending_point":"الصعيد","estimated_time":"55","car_number":"KHL982"}]}
 /// code : 200
 
 class HomeResponse {
@@ -29,8 +29,8 @@ class HomeResponse {
 
 }
 
-/// lines : [{"line_name":"القاهرة","fees":"80.00","map_image":"http://localhost/phpmyadmin/index.php?route=/table/change&db=mowaslaty-passenger-mobile-backend&table=line_data"}]
-/// current_line : [{"starting_point":"القاهرة","ending_point":"ابنوب","estimated_time":15,"car_number":"khl28"}]
+/// lines : [{"line_id":1,"line_name":"ابنوب","fees":"80.00","map_image":"file:///C:/Users/DELL/Downloads/Passenger%20App%20Arabic%20order.pdf"},{"line_id":2,"line_name":"الصعيد","fees":"150.00","map_image":"file:///C:/Users/DELL/Downloads/Passenger%20App%20Arabic%20order.pdf"}]
+/// current_line : [{"starting_point":"القاهرة","ending_point":"أبنوب","estimated_time":"200","car_number":"ا ح م 341"},{"starting_point":"القاهرة","ending_point":"الصعيد","estimated_time":"55","car_number":"KHL982"}]
 
 class Data {
   Data({
@@ -68,9 +68,9 @@ class Data {
 }
 
 /// starting_point : "القاهرة"
-/// ending_point : "ابنوب"
-/// estimated_time : 15
-/// car_number : "khl28"
+/// ending_point : "أبنوب"
+/// estimated_time : "200"
+/// car_number : "ا ح م 341"
 
 class CurrentLine {
   CurrentLine({
@@ -101,27 +101,32 @@ class CurrentLine {
 
 }
 
-/// line_name : "القاهرة"
+/// line_id : 1
+/// line_name : "ابنوب"
 /// fees : "80.00"
-/// map_image : "http://localhost/phpmyadmin/index.php?route=/table/change&db=mowaslaty-passenger-mobile-backend&table=line_data"
+/// map_image : "file:///C:/Users/DELL/Downloads/Passenger%20App%20Arabic%20order.pdf"
 
 class Lines {
   Lines({
+      this.lineId, 
       this.lineName, 
       this.fees, 
       this.mapImage,});
 
   Lines.fromJson(dynamic json) {
+    lineId = json['line_id'];
     lineName = json['line_name'];
     fees = json['fees'];
     mapImage = json['map_image'];
   }
+  int? lineId;
   String? lineName;
   String? fees;
   String? mapImage;
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
+    map['line_id'] = lineId;
     map['line_name'] = lineName;
     map['fees'] = fees;
     map['map_image'] = mapImage;

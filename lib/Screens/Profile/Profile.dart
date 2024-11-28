@@ -24,7 +24,7 @@ class profile extends StatelessWidget {
           children: [
             const SizedBox(height: 15,),
               Image.asset(
-                provider.userData?.data?.imageLink != null
+                provider.userData!.data!.imageLink != null
                     ? provider.userData!.data!.imageLink!
                     : "Images/img_2.png",
               height: 96,

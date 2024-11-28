@@ -10,6 +10,8 @@ class ApiConstants {
   static const String lineDetailsApi = 'api/line_details/';
   static const String trackingTripApi = 'api/tracking_line/ا ح م 341';
   static const String getInfoApi = 'api/info/';
+  static const String tripsHistoryApi = 'api/get_passenger_history/';
+
   static const String showFAQsApi = 'api/question-answers';
 
 

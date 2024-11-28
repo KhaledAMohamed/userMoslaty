@@ -6,7 +6,7 @@ import 'package:user_moslaty/Widgets/NavigationBar_C.dart';
 import 'package:user_moslaty/Widgets/customApppar.dart';
 import 'package:user_moslaty/Widgets/drawer.dart';
 
-import '../../Models/LineDataResponse.dart';
+import '../../Models/LinesDataResponse.dart';
 import '../../Networks/Api_manager/Api_manager.dart';
 import '../TRIP_DETAIL/TRIP DETAIL.dart';
 
@@ -135,7 +135,7 @@ class _Lines_DataState extends State<Lines_Data> {
                                 onTap: () {
                                   Navigator.push(context,
                                       MaterialPageRoute(builder: (context) {
-                                        return (TripDetail());
+                                        return (TripDetail(lineId: linesData.data![index].lineId!,));
                                       }));
                                 },
                                 child: Container(
@@ -172,6 +172,7 @@ class _Lines_DataState extends State<Lines_Data> {
                               const SizedBox(
                                 width: 10,
                               ),
+                              linesData.data![index].availableFlag == 1 ?
                               Container(
                                 height: 44,
                                 width: 65,
@@ -191,7 +192,28 @@ class _Lines_DataState extends State<Lines_Data> {
                                     textAlign: TextAlign.center,
                                   ),
                                 ),
+                              ) :
+                              Container(
+                                height: 44,
+                                width: 100,
+                                decoration: const BoxDecoration(
+                                  color: PColor,
+                                  borderRadius:
+                                  BorderRadius.all(Radius.circular(10)),
+                                ),
+                                child: Center(
+                                  child: const Text(
+                                    'غير متاح',
+                                    style: TextStyle(
+                                        fontSize: 20,
+                                        fontWeight: FontWeight.w500,
+                                        color: SColor,
+                                        fontFamily: 'Inet'),
+                                    textAlign: TextAlign.center,
+                                  ),
+                                ),
                               )
+
                             ],
                           )
                         ],

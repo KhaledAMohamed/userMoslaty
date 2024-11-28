@@ -1,6 +1,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:user_moslaty/Provider/AppConfigProvider.dart';
 import 'package:user_moslaty/Screens/LoginScreen/login_screen.dart';
 import 'package:user_moslaty/Screens/QR_Code/QR_Code.dart';
@@ -133,6 +134,7 @@ class maenList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var provider = Provider.of<AppConfigProvider>(context);
     return (
         Material(
 
@@ -171,10 +173,12 @@ class maenList extends StatelessWidget {
               }
 
               else if (id == 7) {
-                Navigator.push(context, MaterialPageRoute(
-                    builder:(context){
-                      return( LoginScreen());
-                    } ));
+                  Navigator.push(context, MaterialPageRoute(
+                      builder:(context){
+                        return(LoginScreen());
+                      } ));
+
+
               }
             },
             child: Padding(
@@ -204,3 +208,4 @@ class maenList extends StatelessWidget {
     );
   }
 }
+

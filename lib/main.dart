@@ -4,13 +4,15 @@ import 'package:user_moslaty/Provider/AppConfigProvider.dart';
 import 'Screens/LoginScreen/login_screen.dart';
 
 
-void main() {
+
+Future<void> main() async{
   runApp( ChangeNotifierProvider(
     create: (context) => AppConfigProvider(),
       child: User_Moslaty()));
 }
 
 class User_Moslaty extends StatelessWidget {
+
 
   @override
   Widget build(BuildContext context) {
@@ -19,5 +21,7 @@ class User_Moslaty extends StatelessWidget {
       home: LoginScreen(),
 
     );
+
+
   }
 }

@@ -98,7 +98,7 @@ class travel_details extends StatelessWidget {
                                 ),
                               ),
                               Text(
-                                " دقيقة تقريبا${tripDetails.estimatedTime}",
+                                "${tripDetails.estimatedTime}  دقيقة تقريبا ",
                                 style: TextStyle(
                                   fontWeight: FontWeight.w500,
                                   fontSize: 12,
@@ -170,7 +170,7 @@ class travel_details extends StatelessWidget {
                                 ),
                               ),
                               Text(
-                                "  جنيها فقط${tripDetails.fees}",
+                                " ${tripDetails.fees}  جنيها فقط ",
                                 style: TextStyle(
                                   fontWeight: FontWeight.w500,
                                   fontSize: 12,
@@ -237,8 +237,20 @@ class travel_details extends StatelessWidget {
                       ),
                     ],
                   ),
+
                   SizedBox(
                     height: 25,
+                  ),
+                  Text(
+                    " المحطات ",
+                    style: TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.w600,
+                      color: SColor,
+                    ),
+                  ),
+                  SizedBox(
+                    height: 10,
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -275,6 +287,21 @@ class travel_details extends StatelessWidget {
                       )
 
                     ],
+                  ),
+                  ElevatedButton(
+                     style: ElevatedButton.styleFrom(
+                       backgroundColor: PColor,
+                     ),
+                      onPressed: (){},
+                      child: Text(
+                        " انهاء الرحلة ",
+                        style: TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.w600,
+                          color: SColor,
+                        ),
+                      ),
+
                   )
                 ],
               ),

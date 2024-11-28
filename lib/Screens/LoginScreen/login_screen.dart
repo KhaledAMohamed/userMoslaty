@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:user_moslaty/Provider/AppConfigProvider.dart';
 import 'package:user_moslaty/Widgets/toast.dart';
 
@@ -159,8 +160,9 @@ contener(text: " الدخول بواسطة حساب جوجل ",
         try {
           final userDataResponse = await ApiManager.userMainData(response.user!.toString());
           if (userDataResponse != null) {
+            print('user id from login ${response.user.toString()}');
+            provider.setUserId(response.user.toString());
             provider.setUserData(userDataResponse);
-            provider.setUserId(response.user!.toString());
             Navigator.push(context, MaterialPageRoute(builder: (context) {
               return Home_Page();
             }));
